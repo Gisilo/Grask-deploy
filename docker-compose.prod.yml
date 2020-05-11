@@ -16,7 +16,7 @@ services:
       - django
   reactjs:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ../Grask-frontend
     volumes: 
       - /app/node_modules
@@ -28,8 +28,7 @@ services:
     build: 
       dockerfile: Dockerfile
       context: ../Grask-backend
-    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    volumes:
+    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn Grask_backend.wsgi -b 
       - ../Grask-backend:/app
       - ../Grask-backend/assets:/assets
     expose:
