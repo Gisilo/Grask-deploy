@@ -21,6 +21,6 @@ services:
     build: 
       dockerfile: Dockerfile
       context: ../Grask-backend
-    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn Grask_backend.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python manage.py collectstatic --no-input && gunicorn -w 4 Grask_backend.wsgi -b 0.0.0.0:8000"
     env_file:
           - ../Grask-backend/.env.prod
