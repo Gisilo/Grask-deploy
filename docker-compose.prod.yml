@@ -1,11 +1,12 @@
 version: '3'
-
 services:
   nginx:
     restart: always
     build: 
       dockerfile: Dockerfile
       context: ./nginx
+    volumes:
+      - ../Grask-backend/assets:/assets:ro
     ports:
       - '80:80'
       - '443:443'

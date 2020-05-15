@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   nginx:
     restart: always
@@ -7,7 +6,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     volumes:
-      - ../Grask-backend/assets:/assets
+      - ../Grask-backend/assets:/assets:ro
     ports:
       - '80:80'
       - '443:443'
@@ -31,7 +30,6 @@ services:
     command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ../Grask-backend:/app
-      - ../Grask-backend/assets:/assets
     expose:
       - "8000"
     env_file:
